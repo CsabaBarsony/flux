@@ -14,7 +14,6 @@ var _catalog = [
 
 var _cartItems = [];
 
-
 function _removeItem(index){
 	_cartItems[index].inCart = false;
 	_cartItems.splice(index, 1);
@@ -33,7 +32,6 @@ function _decreaseItem(index){
 	}
 }
 
-
 function _addItem(item){
 	if(!item.inCart){
 		item['qty'] = 1;
@@ -49,6 +47,9 @@ function _addItem(item){
 	}
 }
 
+function _addCatalogItem(){
+
+}
 
 var AppStore = merge(EventEmitter.prototype, {
 	emitChange:function(){
