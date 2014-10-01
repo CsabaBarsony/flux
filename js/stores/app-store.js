@@ -5,7 +5,6 @@ var EventEmitter = require('events').EventEmitter;
 
 var CHANGE_EVENT = "change";
 
-
 var _catalog = [
 	{id:1, title: 'Widget #1', cost: 1},
 	{id:2, title: 'Widget #2', cost: 2},
@@ -48,31 +47,33 @@ function _addItem(item){
 }
 
 function _addCatalogItem(){
-
+	var nextId = _catalog.length + 1;
+	_catalog.push({ id: nextId, title: "Widget #" + nextId, cost: nextId });
+	console.log("catalog:", _catalog);
 }
 
 var AppStore = merge(EventEmitter.prototype, {
-	emitChange:function(){
-		this.emit(CHANGE_EVENT)
+	emitChange: function(){
+		this.emit(CHANGE_EVENT);
 	},
 
-	addChangeListener:function(callback){
-		this.on(CHANGE_EVENT, callback)
+	addChangeListener: function(callback){
+		this.on(CHANGE_EVENT, callback);
 	},
 
-	removeChangeListener:function(callback){
-		this.removeListener(CHANGE_EVENT, callback)
+	removeChangeListener: function(callback){
+		this.removeListener(CHANGE_EVENT, callback);
 	},
 
-	getCart:function(){
-		return _cartItems
+	getCart: function(){
+		return _cartItems;
 	},
 
-	getCatalog:function(){
-		return _catalog
+	getCatalog: function(){
+		return _catalog;
 	},
 
-	dispatcherIndex:AppDispatcher.register(function(payload){
+	dispatcherIndex: AppDispatcher.register(function(payload){
 		var action = payload.action; // this is our action from handleViewAction
 		switch(action.actionType){
 			case AppConstants.ADD_ITEM:
@@ -89,6 +90,10 @@ var AppStore = merge(EventEmitter.prototype, {
 
 			case AppConstants.DECREASE_ITEM:
 				_decreaseItem(payload.action.index);
+				break;
+
+			case "addCatalogItem":
+				_addCatalogItem();
 				break;
 		}
 		AppStore.emitChange();

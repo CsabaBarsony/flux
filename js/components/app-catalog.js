@@ -11,6 +11,12 @@ var Catalog = React.createClass({
 	getInitialState: function(){
 		return getCatalog();
 	},
+	componentWillMount:function(){
+		AppStore.addChangeListener(this._onChange)
+	},
+	_onChange:function(){
+		this.setState(getCatalog());
+	},
 	render: function(){
 		var items = this.state.items.map(function(item){
 			return React.DOM.tr(
@@ -23,7 +29,10 @@ var Catalog = React.createClass({
 		return (
 			React.DOM.table(
 				{ className: "table table-hover" },
-				items
+				React.DOM.tbody(
+					null,
+					items
+				)
 			)
 		);
 	}

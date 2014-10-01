@@ -3,7 +3,7 @@ var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 
 gulp.task('browserify', function() {
-	return browserify('./js/main.js')
+	return browserify('./js/main.js', { debug: true })
 		.bundle()
 		//Pass desired output filename to vinyl-source-stream
 		.pipe(source('bundle.js'))

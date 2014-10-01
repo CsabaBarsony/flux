@@ -10,7 +10,8 @@ function cartItems(){
 	return { items: AppStore.getCart() };
 }
 
-var Cart = React.createClass({displayName: 'Cart',
+var Cart = React.createClass({
+	displayName: 'Cart',
 	getInitialState:function(){
 		return cartItems();
 	},

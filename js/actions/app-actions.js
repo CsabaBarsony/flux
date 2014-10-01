@@ -25,6 +25,11 @@ var AppActions = {
 			actionType: AppConstants.INCREASE_ITEM,
 			index: index
 		})
+	},
+	addCatalogItem: function(){
+		AppDispatcher.handleViewAction({
+			actionType: "addCatalogItem"
+		})
 	}
 };
 
